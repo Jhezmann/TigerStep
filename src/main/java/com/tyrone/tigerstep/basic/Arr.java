@@ -1,7 +1,6 @@
 package com.tyrone.tigerstep.basic;
 
 import org.json.JSONArray;
-
 import java.math.BigDecimal;
 
 public class Arr {
