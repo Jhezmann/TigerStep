@@ -1,10 +1,7 @@
 package com.tyrone.tigerstep.basic;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import org.json.JSONObject;
 
 /**
@@ -24,7 +21,7 @@ public class Obj {
      */
     public Obj(String str){
         try {
-            if (str.isEmpty()){
+            if (str.isEmpty()||str==null){
                 this.jObj = new JSONObject();
             } else {
                 this.jObj=new JSONObject(str);
@@ -46,14 +43,6 @@ public class Obj {
         this.jObj = jsonObject;
     }
 
-//    /**
-//     * 转化成JSON对象
-//     * @return JSONObject
-//     */
-//    public JSONObject toJson() {
-//        return new JSONObject(this.jObj.toMap());
-//    }
-
     /**
      * 获取jObj对象
      * @return JSONObject
@@ -69,7 +58,7 @@ public class Obj {
      * @return Obj
      */
     public Obj set(String key, String value){
-        if (key.isEmpty())return this;
+        if (key.isEmpty()||key==null)return this;
         if (value.isEmpty())value = "";
         this.jObj.put(key,value);
         return this;
@@ -130,7 +119,7 @@ public class Obj {
      * @return Obj
      */
     public Obj set(String key, long value){
-        if (key.isEmpty())return this;
+        if (key.isEmpty()||key==null)return this;
         this.jObj.put(key,value);
         return this;
     }
@@ -142,7 +131,7 @@ public class Obj {
      * @return Obj
      */
     public Obj set(String key, boolean value){
-        if (key.isEmpty())return this;
+        if (key.isEmpty()||key==null)return this;
         this.jObj.put(key,value);
         return this;
     }
@@ -154,7 +143,7 @@ public class Obj {
      * @return Obj
      */
     public Obj set(String key, Object value){
-        if (key.isEmpty())return this;
+        if (key.isEmpty()||key==null)return this;
         this.jObj.put(key, value);
         return this;
     }
@@ -166,7 +155,7 @@ public class Obj {
      * @return Obj
      */
     public Obj set(String key, Obj obj){
-        if (key.isEmpty())return this;
+        if (key.isEmpty()||key==null)return this;
         this.jObj.put(key, obj.toJson());
         return this;
     }
@@ -178,7 +167,7 @@ public class Obj {
      * @return
      */
     public Obj set(String key, Arr arr){
-        if (key.isEmpty())return this;
+        if (key.isEmpty()||key==null)return this;
         this.jObj.put(key, arr.toJSONArr());
         return this;
     }
@@ -200,7 +189,29 @@ public class Obj {
         return "";
     }
 
+    /**
+     * 获取所有的键
+     * @return
+     */
+    public Arr keys(){
+        JSONObject jTemp = jObj;
+        Iterator<String> keys = jTemp.keys();
+        Arr arr = new Arr();
+        while (keys.hasNext()){
+            String key = (String) keys.next();
+            arr.add(key);
+        }
+        return arr;
+    }
 
+    public boolean hasKey(String key){
+        if (key.isEmpty()||key==null)return false;
+        Arr keys = this.keys();
+        for (int i = 0; i < keys.length; i++) {
+            if(key.equals(keys.get(i)))return true;
+        }
+        return false;
+    }
 
     /**
      * 转字符串

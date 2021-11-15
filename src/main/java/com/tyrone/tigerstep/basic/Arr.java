@@ -22,7 +22,7 @@ public class Arr {
      */
     public Arr(String str){//
         try{
-            if(str.isEmpty()){
+            if(str.isEmpty()||str==null){
                 jArr = new JSONArray();
             }else{
                 jArr = new JSONArray(str);
