@@ -275,6 +275,13 @@ public class Arr {
         return this;
     }
 
+    public boolean hasString(String str){
+        for (int i = 0; i < this.length; i++) {
+            if(this.get(i).contains(str))return true;
+        }
+        return false;
+    }
+
     /**
      * 转字符串
      * @return

@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class MainController {
+    
+    @RequestMapping("/index")
+    public String mainControl(){
+        return "index";
+    }
+
     @RequestMapping("/req/{method}") // ajax请求
     @ResponseBody
     private static String reqManager(@PathVariable String method, HttpServletRequest request, HttpServletResponse response) throws Exception{
